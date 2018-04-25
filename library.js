@@ -234,7 +234,7 @@ const _Lib = (function () {
         /**
          *
          * @param {string} tagName
-         * @param {Object} attributes
+         * @param {Object} [attributes]
          * @returns {Lib}
          */
         create: function (tagName, attributes) {
@@ -274,7 +274,8 @@ const _Lib = (function () {
                 'border: 1px solid #051c40',
                 'padding: 12px'
             ].join(';')
-            const refOutput = typeof ref !== 'undefined' && '\nReference: \n' + ref
+
+            const refOutput = typeof ref !== 'undefined' ? '\nReference: \n' + ref : ''
             const message = 'Performance log \n' +
                 '---------------------------------\n' +
                 'Start epoch -- | ' + start  + ' ms\n' +
@@ -472,7 +473,7 @@ const _Lib = (function () {
          * @returns {string|number|undefined}
          */
         roundTo: function (n, digits, toString) {
-            if (this.isType(n, 'Undefined')) {
+            if (typeof n !== 'undefined') {
                 return this.handleError(new Error('No number provided for rounding'))
             }
             const Digits = digits || 0
@@ -486,3 +487,7 @@ const _Lib = (function () {
     }
     return _Lib
 }())
+
+
+// Temporary
+const siteID = 123
