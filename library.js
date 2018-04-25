@@ -261,7 +261,7 @@ const _Lib = (function () {
          *
          * @param {number} start
          * @param {number} end
-         * @param {*} ref
+         * @param {*} [ref]
          */
         logPerformance: function (start, end, ref) {
             if (!this.debug) {
@@ -274,7 +274,7 @@ const _Lib = (function () {
                 'border: 1px solid #051c40',
                 'padding: 12px'
             ].join(';')
-            const refOutput = typeof ref !== 'undefined' ? '\nReference: \n' + ref : ''
+            const refOutput = typeof ref !== 'undefined' && '\nReference: \n' + ref
             const message = 'Performance log \n' +
                 '---------------------------------\n' +
                 'Start epoch -- | ' + start  + ' ms\n' +
@@ -286,6 +286,11 @@ const _Lib = (function () {
 
             console.log('%c' + message, styles)
         },
+        /**
+         *
+         * @param {string} string
+         * @returns {string}
+         */
         camelCaseToHyphenated: function (string) {
             return string.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
         },
