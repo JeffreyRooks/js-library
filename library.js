@@ -487,7 +487,3 @@ const _Lib = (function () {
     }
     return _Lib
 }())
-
-
-// Temporary
-const siteID = 123
