@@ -23,6 +23,11 @@
 'use strict'
 
 const _Lib = (function () {
+    /**
+     *
+     * @param {array} els
+     * @constructor
+     */
     function Lib (els) {
         for (let i = 0; i < els.length; i++) {
             this[i] = els[i]
@@ -322,11 +327,13 @@ const _Lib = (function () {
          * @param {string} requestType
          * @param {string} url - relative URLS (local)
          * @param {string} data - JSON string
-         * @param {boolean} handleError
+         * @param {boolean} [handleError=true]
          * @param {function} [responseHandler] - callback function is optional
          */
         ajax: function (requestType, url, data, responseHandler, handleError) {
-            const HandleError = handleError || true
+            if (typeof handleError === 'undefined') {
+                const handleError = true
+            }
             const xhr = new XMLHttpRequest()
             xhr.open(requestType, url, true)
 
@@ -363,7 +370,7 @@ const _Lib = (function () {
                      * When responseHandler is defined, use it
                      */
                     responseHandler && responseHandler(xhr.response)
-                    if (HandleError) {
+                    if (handleError) {
                         _this.handleError(xhr.response)
                     } else {
                         /*
@@ -382,7 +389,7 @@ const _Lib = (function () {
         /**
          *
          * @param {Object} obj - Handles object's one level deep with values as string|array
-         * @returns {string|undefined} - Serialized object string
+         * @returns {string} - Serialized object string
          */
         serializeObject: function (obj) {
             if (!this.isType(obj, 'Object')) {
@@ -497,7 +504,7 @@ const _Lib = (function () {
          * @returns {string|number}
          */
         round: function (number, digits, toString) {
-            if (typeof number !== 'undefined') {
+            if (typeof number === 'undefined') {
                 return this.handleError(new Error('No number provided for rounding'))
             }
             const Digits = digits || 0
