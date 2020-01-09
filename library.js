@@ -114,15 +114,6 @@ const _Lib = (function () {
         return _Lib.get(parent)
     }
 
-    Lib.prototype.scale = function (x, y, origin) {
-        return this.forEach(function (el) {
-            el.style.transform = 'scale(' + x + ',' + y + ')'
-            if (typeof origin !== 'undefined') {
-                el.style.transformOrigin = origin
-            }
-        })
-    }
-
     Lib.prototype.show = function () {
         return this.forEach(function (el) {
             el.style.display = 'block'
@@ -282,45 +273,6 @@ const _Lib = (function () {
                 }
             }
             return el
-        },
-        debug: location.hostname.indexOf('portal') === -1,
-        /**
-         *
-         * @param {number} start
-         * @param {number} end
-         * @param {*} [ref='']
-         */
-        logPerformance: function (start, end, ref) {
-            if (!this.debug) {
-                return
-            }
-
-            const styles = [
-                'background-color: #020e20',
-                'color: #42A5F5',
-                'border: 1px solid #051c40',
-                'padding: 12px'
-            ].join(';')
-
-            const refOutput = typeof ref !== 'undefined' ? '\nReference: \n' + ref : ''
-            const message = 'Performance log \n' +
-                '---------------------------------\n' +
-                'Start epoch -- | ' + start + ' ms\n' +
-                'End epoch ---- | ' + end + ' ms\n' +
-                'Delta -------- | ' + (end - start) + ' ms\n' +
-                'Delta -------- | ' + (end - start) / 1000 + ' s\n' +
-                '---------------------------------' +
-                refOutput
-
-            console.log('%c' + message, styles)
-        },
-        /**
-         *
-         * @param {string} string
-         * @returns {string}
-         */
-        camelCaseToHyphenated: function (string) {
-            return string.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
         },
         /**
          *
